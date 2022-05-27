@@ -12,6 +12,10 @@ class Kingdom {
         TODOS: 'todos'
     }
 
+    static SETTINGS = {
+        INJECT_BUTTON: 'inject-button'
+    }
+
     static TEMPLATES = {
         CITYLIST: `modules/${this.ID}/templates/tracker.hbs`
     }
@@ -26,6 +30,16 @@ class Kingdom {
 
     static initialize() {
         this.KingdomConfig = new KingdomConfig();
+
+        game.settings.register(this.ID, this.SETTINGS.INJECT_BUTTON, {
+            name: `Kingdom.settings.${this.SETTINGS.INJECT_BUTTON}.Name`,
+            default: true,
+            type: Boolean,
+            scope: 'client',
+            config: true,
+            hint: `Kingdom.settings.${this.SETTINGS.INJECT_BUTTON}.Hint`,
+            onChange: () => ui.players.render()
+        });
     }
 }
 
@@ -100,11 +114,16 @@ class KingdomData {
 }
 
 Hooks.on('renderPlayerList', (playerList, html) => {
+
+    if (!game.settings.get(Kingdom.ID, Kingdom.SETTINGS.INJECT_BUTTON)) {
+        return;
+    }
+
     // find the element which has our logged in user's id
     const loggedInUserListItem = html.find(`[data-user-id="${game.userId}"]`)
 
     // create localized tooltip
-    const tooltip = game.i18n.localize('TODO-LIST.button-title');
+    const tooltip = game.i18n.localize('Kingdom.button-title');
 
     // insert a button at the end of this element
     loggedInUserListItem.append(
@@ -175,8 +194,16 @@ class KingdomConfig extends FormApplication {
             }
 
             case 'delete': {
-                await KingdomData.deleteToDo(toDoId);
-                this.render();
+                const confirmed = await Dialog.confirm({
+                    title: game.i18n.localize("Kingdom.confirms.deleteConfirm.Title"),
+                    content: game.i18n.localize("Kingdom.confirms.deleteConfirm.Content")
+                });
+
+                if (confirmed) {
+                    await KingdomData.deleteToDo(toDoId);
+                    this.render();
+                }
+
                 break;
             }
 
