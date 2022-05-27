@@ -7,9 +7,24 @@ console.log('KKT Initialization');
 
 class Kingdom {
     static ID = 'kingmaker-kingdom-tracker';
+    static ACTORNAME = 'KKT Kingdom'
 
     static FLAGS = {
-        TODOS: 'todos'
+        Name: 'name',
+        Alignment: 'alignment',
+        Size: 'size',
+        ControlDC: 'controldc',
+        Population: 'population',
+        Stability: 'stability',
+        Economy: 'economy',
+        Loyalty: 'loyalty',
+        Unrest: 'unrest',
+        Treasury: 'treasury',
+        Consumption: 'consumption',
+        Leadership: 'leadership',
+        Edicts: 'edicts',
+
+        Cities: 'cities',
     }
 
     static SETTINGS = {
@@ -29,6 +44,14 @@ class Kingdom {
     }
 
     static initialize() {
+
+        //TODO: get this to populate a starting actor
+
+        if (game.actors.getName(Kingdom.ACTORNAME) == null) {
+            let actor = Actor.create({name: Kingdom.ACTORNAME, type: "npc"})
+            this.ID = actor.id
+        }
+
         this.KingdomConfig = new KingdomConfig();
 
         game.settings.register(this.ID, this.SETTINGS.INJECT_BUTTON, {
@@ -49,67 +72,12 @@ Hooks.once('init', () => {
 
 class KingdomData {
 
-    static getToDosForUser(userId) {
-        return game.users.get(userId)?.getFlag(Kingdom.ID, Kingdom.FLAGS.TODOS);
+    static getKingdomAttribute(flag) {
+        return game.actors.getName(Kingdom.ACTORNAME).getFlag(Kingdom.ID, flag);
     }
 
-    static createToDo(userId, toDoData) {
-        // generate a random id for this new ToDo and populate the userId
-        const newToDo = {
-            isDone: false,
-            ...toDoData,
-            id: foundry.utils.randomID(16),
-            userId,
-        }
-
-        // construct the update to insert the new ToDo
-        const newToDos = {
-            [newToDo.id]: newToDo
-        }
-
-        // update the database with the new ToDos
-        return game.users.get(userId)?.setFlag(Kingdom.ID, Kingdom.FLAGS.TODOS, newToDos);
-    }
-
-    static get allToDos() {
-        const allToDos = game.users.reduce((accumulator, user) => {
-            const userTodos = this.getToDosForUser(user.id);
-
-            return {
-                ...accumulator,
-                ...userTodos
-            }
-        }, {});
-
-        return allToDos;
-    }
-
-    static updateToDo(toDoId, updateData) {
-        const relevantToDo = this.allToDos[toDoId];
-
-        // construct the update to send
-        const update = {
-            [toDoId]: updateData
-        }
-
-        // update the database with the updated ToDo list
-        return game.users.get(relevantToDo.userId)?.setFlag(Kingdom.ID, Kingdom.FLAGS.TODOS, update);
-    }
-
-    static deleteToDo(toDoId) {
-        const relevantToDo = this.allToDos[toDoId];
-
-        // Foundry specific syntax required to delete a key from a persisted object in the database
-        const keyDeletion = {
-            [`-=${toDoId}`]: null
-        }
-
-        // update the database with the updated ToDo list
-        return game.users.get(relevantToDo.userId)?.setFlag(Kingdom.ID, Kingdom.FLAGS.TODOS, keyDeletion);
-    }
-
-    static updateUserToDos(userId, updateData) {
-        return game.users.get(userId)?.setFlag(Kingdom.ID, Kingdom.FLAGS.TODOS, updateData);
+    static setKingdomAttribute(flag, newValue) {
+        return game.actors.getName(Kingdom.ACTORNAME).setFlag(Kingdom.ID, flag, newValue);
     }
 }
 
@@ -160,14 +128,15 @@ class KingdomConfig extends FormApplication {
 
     getData(options) {
         return {
-            todos: KingdomData.getToDosForUser(options.userId)
+            name: KingdomData.getKingdomAttribute(Kingdom.FLAGS.Name),
+            note: "Add more getters here if this is useful"
         }
     }
 
     async _updateObject(event, formData) {
         const expandedData = foundry.utils.expandObject(formData);
-
-        await KingdomData.updateUserToDos(this.options.userId, expandedData);
+        Kingdom.log("What is this" + formData);
+        // await KingdomData.updateUserToDos(this.options.userId, expandedData);
 
         this.render();
     }
@@ -188,22 +157,22 @@ class KingdomConfig extends FormApplication {
 
         switch (action) {
             case 'create': {
-                await KingdomData.createToDo(this.options.userId);
+                //await KingdomData.createToDo(this.options.userId);
                 this.render();
                 break;
             }
 
             case 'delete': {
-                const confirmed = await Dialog.confirm({
-                    title: game.i18n.localize("Kingdom.confirms.deleteConfirm.Title"),
-                    content: game.i18n.localize("Kingdom.confirms.deleteConfirm.Content")
-                });
-
-                if (confirmed) {
-                    await KingdomData.deleteToDo(toDoId);
-                    this.render();
-                }
-
+                // const confirmed = await Dialog.confirm({
+                //     title: game.i18n.localize("Kingdom.confirms.deleteConfirm.Title"),
+                //     content: game.i18n.localize("Kingdom.confirms.deleteConfirm.Content")
+                // });
+                //
+                // if (confirmed) {
+                //     await KingdomData.deleteToDo(toDoId);
+                //     this.render();
+                // }
+                //
                 break;
             }
 
