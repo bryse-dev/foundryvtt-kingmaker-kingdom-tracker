@@ -1,0 +1,63 @@
+<form class="{{cssClass}} kingdom-form" autocomplete="off">
+  {{#if editable}}
+  <div class="kingdom-name editable">
+    <input name="name" value="{{actor.name}}" />
+  </div>
+  {{else}}
+  <div class="kingdom-name">
+    <input name="name" value="{{actor.name}}" readonly />
+  </div>
+  {{/if}}
+  {{#if editable}}
+  <div class="kingdom-progress">
+    {{#if (lte kingdom.progress 0)}}
+    <button name="minus" disabled>
+      <i class="fa fa-minus"></i>
+    </button>
+    {{else}}
+    <button name="minus">
+      <i class="fa fa-minus"></i>
+    </button>
+    {{/if}}
+    <button name="reset">
+      <i class="fa fa-redo"></i>
+    </button>
+    {{#if (gte kingdom.progress kingdom.size)}}
+    <button name="plus" disabled>
+      <i class="fa fa-plus"></i>
+    </button>
+    {{else}}
+    <button name="plus">
+      <i class="fa fa-plus"></i>
+    </button>
+    {{/if}}
+  </div>
+  {{/if}}
+  <div class="kingdom-image">
+    <img src="{{kingdom.image.url}}" width="{{kingdom.image.width}}" height="{{kingdom.image.height}}" />
+  </div>
+  {{#if editable}}
+  <div class="kingdom-config">
+    <div class="kingdom-config-group theme">
+      <label for="theme"><i class="fa fa-palette"></i></label>
+      <select name="theme">
+        {{#select kingdom.theme}}
+        {{#each kingdom.settings.themes as |theme|}}
+        <option value="{{theme}}">{{theme}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+    <div class="kingdom-config-group">
+      <label for="size"><i class="fa fa-chart-pie"></i></label>
+      <select name="size">
+        {{#select kingdom.size}}
+        {{#each kingdom.settings.sizes as |size|}}
+        <option value="{{size}}">{{size}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+  </div>
+  {{/if}}
+</form>

@@ -1,0 +1,68 @@
+.kingdoms.sheet .kingdom-progress {
+  text-align: center;
+}
+.kingdoms.sheet .kingdom-name {
+  height: 60px;
+  text-align: left;
+}
+.kingdoms.sheet .kingdom-name input {
+  height: 40px;
+  line-height: 48px;
+  font-size: 32px;
+  width: 100%;
+  background: none;
+  border: 1px solid transparent;
+  padding: 1px 3px;
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  border-radius: 3px;
+  color: rgb(25, 24, 19);
+  margin: 0;
+}
+.kingdoms.sheet .kingdom-name.editable input:hover, .kingdoms.sheet .kingdom-name.editable input:focus {
+  border: 1px solid rgb(25, 24, 19);
+}
+.kingdoms.sheet .kingdom-progress button {
+  width: 140px;
+  margin: 0;
+}
+.kingdoms.sheet .kingdom-progress button[name=reset] {
+  width: 40px;
+}
+.kingdoms.sheet .kingdom-progress button:disabled {
+  color: #aaaaaa;
+  border: none;
+}
+.kingdoms.sheet .kingdom-image img {
+  border: none;
+}
+.kingdoms.sheet .kingdom-config {
+  text-align: center;
+}
+.kingdoms.sheet .kingdom-config .kingdom-config-group {
+  margin-left: 1.5em;
+  display: inline-block;
+}
+.kingdoms.sheet .kingdom-config .kingdom-config-group:first-child {
+  margin-left: 0;
+}
+.kingdoms.sheet .kingdom-config .kingdom-config-group label {
+  margin-right: 3px;
+}
+.kingdoms.sheet .kingdom-config .kingdom-config-group select {
+  width: 50px;
+}
+.kingdoms.sheet .kingdom-config .kingdom-config-group.theme select {
+  width: 175px;
+}
+.kingdoms.sheet .kingdom-debug {
+  background-color: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/* system specific */
+
+.kingdoms.sheet.kingdoms-system-dnd5e .kingdom-name.editable input:hover, .kingdoms.sheet.kingdoms-system-dnd5e .kingdom-name.editable input:focus {
+  box-shadow: 0 0 10px #ff0000;
+}
