@@ -1,13 +1,13 @@
 
 Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
-    registerPackageDebugFlag(ToDoList.ID);
+    registerPackageDebugFlag(Kingdom.ID);
 });
 
 console.log('KKT Initialization');
 
 class Kingdom {
     static ID = 'kingmaker-kingdom-tracker';
-    static ACTORNAME = 'KKT Kingdom'
+    static ACTORNAME = "KKT Kingdom";
 
     static FLAGS = {
         Name: 'name',
@@ -47,10 +47,10 @@ class Kingdom {
 
         //TODO: get this to populate a starting actor
 
-        if (game.actors.getName(Kingdom.ACTORNAME) == null) {
+        // if (game.actors.get(Kingdom.ID) == null) {
             let actor = Actor.create({name: Kingdom.ACTORNAME, type: "npc"})
-            this.ID = actor.id
-        }
+            Kingdom.log("TEST1: " + actor)
+        // }
 
         this.KingdomConfig = new KingdomConfig();
 
@@ -73,11 +73,11 @@ Hooks.once('init', () => {
 class KingdomData {
 
     static getKingdomAttribute(flag) {
-        return game.actors.getName(Kingdom.ACTORNAME).getFlag(Kingdom.ID, flag);
+        return game.actors.getName(Kingdom.ID).getFlag(Kingdom.ID, flag);
     }
 
     static setKingdomAttribute(flag, newValue) {
-        return game.actors.getName(Kingdom.ACTORNAME).setFlag(Kingdom.ID, flag, newValue);
+        return game.actors.getName(Kingdom.ID).setFlag(Kingdom.ID, flag, newValue);
     }
 }
 
