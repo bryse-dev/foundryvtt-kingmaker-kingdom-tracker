@@ -43,10 +43,11 @@ export class KingdomConfig {
     static governmentTypes() {
         return ["Magocracy", "Autocracy", "Oligarchy", "Overlord", "Republic", "Secret Syndicate", "Theocracy"];
     }
-
-    constructor() {
-        this.controlDC = 15;
-        this.leadershipRoles = [
+    static controlDC() {
+        return 15;
+    }
+    static leadershipRoles() {
+        return [
             new LeadershipRole('Ruler', [CHARISMA], [ECONOMY, LOYALTY, STABILITY], 1, [], 0, LEADERSHIP, 0,
                 "Choose one kingdom attribute (Economy, Loyalty, or Stability). Add your Charisma modifier to this attribute.  If your kingdom's Size is 26–100, choose a second kingdom attribute and add your Charisma modifier to it as well.  If your kingdom's Size is 101 or more, choose a third kingdom attribute and add your Charisma modifier to it too.  If you have the Leadership feat, the bonus from the feat applies to all kingdom attributes you affect (one, two, or three attributes, depending on the kingdom's Size).",
                 "A kingdom without a ruler cannot claim new hexes, create Farms, build Roads, or purchase settlement districts. Unrest increases by 4 during the kingdom's Upkeep Phase."

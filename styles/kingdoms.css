@@ -36,7 +36,7 @@
   border: none;
 }
 .kingdoms.sheet .kingdom-config {
-  text-align: center;
+  text-align: left;
 }
 .kingdoms.sheet .kingdom-config .kingdom-config-group {
   margin-left: 1.5em;
@@ -49,7 +49,7 @@
   margin-right: 3px;
 }
 .kingdoms.sheet .kingdom-config .kingdom-config-group select {
-  width: 50px;
+  width: 200px;
 }
 .kingdoms.sheet .kingdom-config .kingdom-config-group.governmentType select {
   width: 175px;

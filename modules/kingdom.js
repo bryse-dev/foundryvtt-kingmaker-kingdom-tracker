@@ -25,7 +25,13 @@ export class Kingdom {
   }
 
   static get governmentTypes () {
-    return KingdomConfig.governmentTypes()
+    return KingdomConfig.governmentTypes
+  }
+  static get controlDC () {
+    return KingdomConfig.controlDC
+  }
+  static get leadershipRoles () {
+    return KingdomConfig.leadershipRoles()
   }
 
   get governmentType () {

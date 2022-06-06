@@ -1,6 +1,7 @@
 import { Kingdom } from "./kingdom.js";
 import { getSystemMapping } from "./systems/index.js";
 import { log, warn } from "./util.js";
+import {KingdomConfig} from "./config.js";
 
 const DISPLAY_NAME = {
   ALWAYS_FOR_EVERYONE: 50
@@ -23,8 +24,8 @@ export class KingdomSheet extends ActorSheet {
       {
         classes: ["kingdoms", "sheet", `kingdoms-system-${game.data.system.id}`, "actor", "npc"],
         template: "/modules/kingmaker-kingdom-tracker/templates/sheet.html",
-        width: 350,
-        height: 525,
+        width: 800,
+        height: 600,
         ...supportedSystem.sheetDefaultOptions
       }
     );
@@ -59,7 +60,9 @@ export class KingdomSheet extends ActorSheet {
         },
         settings: {
           sizes: Kingdom.sizes,
-          governmentTypes: Kingdom.governmentTypes
+          governmentTypes: KingdomConfig.governmentTypes,
+          controlDC: KingdomConfig.controlDC,
+          leadershipRoles: KingdomConfig.leadershipRoles
         }
       }
     });
