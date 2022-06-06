@@ -51,7 +51,7 @@
 .kingdoms.sheet .kingdom-config .kingdom-config-group select {
   width: 50px;
 }
-.kingdoms.sheet .kingdom-config .kingdom-config-group.theme select {
+.kingdoms.sheet .kingdom-config .kingdom-config-group.formOfGovernment select {
   width: 175px;
 }
 .kingdoms.sheet .kingdom-debug {

@@ -10,7 +10,7 @@ const defaultLoadKingdomFromActor = ({ actor }) => {
   return {
     progress: actor.getFlag("kingmaker-kingdom-tracker", "progress"),
     size: actor.getFlag("kingmaker-kingdom-tracker", "size"),
-    theme: actor.getFlag("kingmaker-kingdom-tracker", "theme")
+    formOfGovernment: actor.getFlag("kingmaker-kingdom-tracker", "formOfGovernment")
   };
 };
 
@@ -20,7 +20,7 @@ const defaultPersistKingdomToActor = async ({ kingdom }) => {
       kingdoms: {
         progress: kingdom.progress,
         size: kingdom.size,
-        theme: kingdom.theme
+        formOfGovernment: kingdom.formOfGovernment
       }
     }
   };

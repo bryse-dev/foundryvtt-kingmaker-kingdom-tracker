@@ -38,12 +38,12 @@
   </div>
   {{#if editable}}
   <div class="kingdom-config">
-    <div class="kingdom-config-group theme">
-      <label for="theme"><i class="fa fa-palette"></i></label>
-      <select name="theme">
-        {{#select kingdom.theme}}
-        {{#each kingdom.settings.themes as |theme|}}
-        <option value="{{theme}}">{{theme}}</option>
+    <div class="kingdom-config-group formOfGovernment">
+      <label for="formOfGovernment"><i class="fa fa-palette"></i></label>
+      <select name="formOfGovernment">
+        {{#select kingdom.formOfGovernment}}
+        {{#each kingdom.settings.formOfGovernments as |formOfGovernment|}}
+        <option value="{{formOfGovernment}}">{{formOfGovernment}}</option>
         {{/each}}
         {{/select}}
       </select>

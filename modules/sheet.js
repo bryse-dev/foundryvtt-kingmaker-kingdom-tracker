@@ -51,7 +51,7 @@ export class KingdomSheet extends ActorSheet {
       kingdom: {
         progress: kingdom.progress,
         size: kingdom.size,
-        theme: kingdom.theme,
+        formOfGovernment: kingdom.formOfGovernment,
         image: {
           url: kingdom.image.img,
           width: kingdom.image.width,
@@ -59,7 +59,7 @@ export class KingdomSheet extends ActorSheet {
         },
         settings: {
           sizes: Kingdom.sizes,
-          themes: Kingdom.themes
+          formOfGovernments: Kingdom.formOfGovernments
         }
       }
     });
@@ -68,27 +68,27 @@ export class KingdomSheet extends ActorSheet {
   activateListeners (html) {
     super.activateListeners(html);
 
-    html.find("button[name=minus]").click(async (ev) => {
-      ev.preventDefault();
-      const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
-      this.updateKingdom(oldKingdom.decrement());
-    });
-
-    html.find("button[name=plus]").click(async (ev) => {
-      ev.preventDefault();
-      const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
-      this.updateKingdom(oldKingdom.increment());
-    });
-
-    html.find("button[name=reset]").click(async (ev) => {
-      ev.preventDefault();
-      const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
-      this.updateKingdom(new Kingdom({
-        theme: oldKingdom.theme,
-        progress: 0,
-        size: oldKingdom.size
-      }));
-    });
+    // html.find("button[name=minus]").click(async (ev) => {
+    //   ev.preventDefault();
+    //   const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
+    //   this.updateKingdom(oldKingdom.decrement());
+    // });
+    //
+    // html.find("button[name=plus]").click(async (ev) => {
+    //   ev.preventDefault();
+    //   const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
+    //   this.updateKingdom(oldKingdom.increment());
+    // });
+    //
+    // html.find("button[name=reset]").click(async (ev) => {
+    //   ev.preventDefault();
+    //   const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
+    //   this.updateKingdom(new Kingdom({
+    //     formOfGovernment: oldKingdom.formOfGovernment,
+    //     progress: 0,
+    //     size: oldKingdom.size
+    //   }));
+    // });
   }
 
   async _updateObject(_event, form) {
@@ -100,7 +100,7 @@ export class KingdomSheet extends ActorSheet {
     let newKingdom = new Kingdom({
       progress: oldKingdom.progress,
       size: form.size,
-      theme: form.theme
+      formOfGovernment: form.formOfGovernment
     });
     await this.updateKingdom(newKingdom);
   }
