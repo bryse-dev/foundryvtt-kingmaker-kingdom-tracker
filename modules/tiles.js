@@ -57,7 +57,7 @@ export default {
         : event.target.parentElement;
       if (target.classList.contains("cycle-size")) {
         newKingdom = oldKingdom.cycleSize();
-      } else if (target.classList.contains("cycle-formOfGovernment")) {
+      } else if (target.classList.contains("cycle-governmentType")) {
         newKingdom = oldKingdom.cycleTheme();
       } else if (target.classList.contains("progress-up")) {
         newKingdom = oldKingdom.increment();

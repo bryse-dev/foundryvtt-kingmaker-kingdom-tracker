@@ -5,7 +5,7 @@ export default {
     return {
       progress: actor.getFlag("kingmaker-kingdom-tracker", "progress"),
       size: actor.getFlag("kingmaker-kingdom-tracker", "size"),
-      formOfGovernment: actor.getFlag("kingmaker-kingdom-tracker", "formOfGovernment")
+      governmentType: actor.getFlag("kingmaker-kingdom-tracker", "governmentType")
     };
   },
 
@@ -23,7 +23,7 @@ export default {
         kingdoms: {
           progress: kingdom.progress,
           size: kingdom.size,
-          formOfGovernment: kingdom.formOfGovernment,
+          governmentType: kingdom.governmentType,
         }
       }
     };

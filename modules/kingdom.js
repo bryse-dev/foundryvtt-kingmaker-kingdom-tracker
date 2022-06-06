@@ -11,7 +11,7 @@ export class Kingdom {
     return [4, 6, 8, 12];
   }
 
-  constructor ({ formOfGovernment, size, progress } = {}) {
+  constructor ({ governmentType, size, progress } = {}) {
     let config = new KingdomConfig()
     log("HERE: " + config.governmentTypes)
     this._config = config
@@ -21,15 +21,15 @@ export class Kingdom {
     const p = (!progress || progress < 0) ? 0 : progress < this._size ? progress : this._size;
     this._progress = p || 0;
 
-    this._formOfGovernment = formOfGovernment ||  KingdomConfig.governmentTypes[0];
+    this._governmentType = governmentType ||  KingdomConfig.governmentTypes[0];
   }
 
-  static get formOfGovernments () {
+  static get governmentTypes () {
     return KingdomConfig.governmentTypes()
   }
 
-  get formOfGovernment () {
-    return this._formOfGovernment;
+  get governmentType () {
+    return this._governmentType;
   }
 
   get size () {
@@ -51,7 +51,7 @@ export class Kingdom {
   get flags () {
     return {
       kingdoms: {
-        formOfGovernment: this._formOfGovernment,
+        governmentType: this._governmentType,
         size: this._size,
         progress: this._progress
       }
@@ -60,7 +60,7 @@ export class Kingdom {
 
   // cycleSize () {
   //   return new Kingdom({
-  //     formOfGovernment: this.formOfGovernment,
+  //     governmentType: this.governmentType,
   //     size: Kingdom.sizes[nextIndexInArray(Kingdom.sizes, this.size)],
   //     progress: this.progress
   //   });
@@ -68,7 +68,7 @@ export class Kingdom {
   //
   // cycleTheme () {
   //   return new Kingdom({
-  //     formOfGovernment: Kingdom.formOfGovernments[nextIndexInArray(Kingdom.formOfGovernments, this.formOfGovernment)],
+  //     governmentType: Kingdom.governmentTypes[nextIndexInArray(Kingdom.governmentTypes, this.governmentType)],
   //     size: this.size,
   //     progress: this.progress
   //   });
@@ -77,7 +77,7 @@ export class Kingdom {
   // increment () {
   //   const old = this;
   //   return new Kingdom({
-  //     formOfGovernment: old.formOfGovernment,
+  //     governmentType: old.governmentType,
   //     size: old.size,
   //     progress: old.progress + 1
   //   });
@@ -86,7 +86,7 @@ export class Kingdom {
   // decrement () {
   //   const old = this;
   //   return new Kingdom({
-  //     formOfGovernment: old.formOfGovernment,
+  //     governmentType: old.governmentType,
   //     size: old.size,
   //     progress: old.progress - 1
   //   });
@@ -96,10 +96,10 @@ export class Kingdom {
     return kingdom
       && kingdom._progress === this._progress
       && kingdom._size === this._size
-      && kingdom._formOfGovernment === this._formOfGovernment;
+      && kingdom._governmentType === this._governmentType;
   }
 
   toString () {
-    return `${this._progress}/${this._size} • ${this._formOfGovernment}`;
+    return `${this._progress}/${this._size} • ${this._governmentType}`;
   }
 }

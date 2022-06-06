@@ -51,7 +51,7 @@ export class KingdomSheet extends ActorSheet {
       kingdom: {
         progress: kingdom.progress,
         size: kingdom.size,
-        formOfGovernment: kingdom.formOfGovernment,
+        governmentType: kingdom.governmentType,
         image: {
           url: kingdom.image.img,
           width: kingdom.image.width,
@@ -59,7 +59,7 @@ export class KingdomSheet extends ActorSheet {
         },
         settings: {
           sizes: Kingdom.sizes,
-          formOfGovernments: Kingdom.formOfGovernments
+          governmentTypes: Kingdom.governmentTypes
         }
       }
     });
@@ -84,7 +84,7 @@ export class KingdomSheet extends ActorSheet {
     //   ev.preventDefault();
     //   const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));
     //   this.updateKingdom(new Kingdom({
-    //     formOfGovernment: oldKingdom.formOfGovernment,
+    //     governmentType: oldKingdom.governmentType,
     //     progress: 0,
     //     size: oldKingdom.size
     //   }));
@@ -100,7 +100,7 @@ export class KingdomSheet extends ActorSheet {
     let newKingdom = new Kingdom({
       progress: oldKingdom.progress,
       size: form.size,
-      formOfGovernment: form.formOfGovernment
+      governmentType: form.governmentType
     });
     await this.updateKingdom(newKingdom);
   }
