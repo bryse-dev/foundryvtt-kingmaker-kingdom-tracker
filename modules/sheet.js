@@ -26,6 +26,7 @@ export class KingdomSheet extends ActorSheet {
         template: "/modules/kingmaker-kingdom-tracker/templates/sheet.html",
         width: 800,
         height: 600,
+        tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "leadership" }],
         ...supportedSystem.sheetDefaultOptions
       }
     );
@@ -71,6 +72,8 @@ export class KingdomSheet extends ActorSheet {
   activateListeners (html) {
     super.activateListeners(html);
 
+
+// JavaScript
     // html.find("button[name=minus]").click(async (ev) => {
     //   ev.preventDefault();
     //   const oldKingdom = new Kingdom(this.system.loadKingdomFromActor({ actor: this.actor }));

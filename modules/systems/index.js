@@ -1,8 +1,6 @@
 import DND5E from "./dnd5e.js";
-import BitD from "./blades-in-the-dark.js";
 
 const SUPPORTED_SYSTEMS = {
-  "blades-in-the-dark": BitD,
   "dnd5e": DND5E
 };
 

@@ -1,3 +1,81 @@
+<form class="tracker flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    {{!-- Header stuff goes here --}}
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" widoth="100"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+      <div class="resources grid grid-2col">
+        <div class="resource flex-group-center">
+          <label for="data.health.value" class="resource-label">Health</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="data.power.value" class="resource-label">Power</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="data.power.value" value="{{data.power.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <input type="text" name="data.power.max" value="{{data.power.max}}" data-dtype="Number"/>
+          </div>
+        </div>
+      </div>
+      <div class="abilities grid grid-3col">
+        {{#each data.abilities as |ability key|}}
+        <div class="ability flexrow flex-group-center">
+          <label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
+          <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+          <span class="ability-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description" data-group="primary">Description</a>
+    <a class="item" data-tab="leadership" data-group="primary">Leadership</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Biography Tab --}}
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor content=kingdom.settings.description target="kingdom.settings.description" button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Owned Items Tab --}}
+    <div class="tab leadership" data-group="primary" data-tab="leadership">
+      <ol class="leaders-list">
+        <li class="item flexrow leadership-header">
+          <div class="leadership-image"></div>
+          <div class="leadership-name">Name</div>
+          <div class="leadership-controls">
+            <a class="leadership-control leadership-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add item</a>
+          </div>
+        </li>
+        {{#each kingdom.settings.leadershipRoles as |leadershipRole|}}
+        <li class="item flexrow" data-leadership-id="{{leadershipRole.name}}">
+          <div class="leadership-image"><img src="{{item.img}}" title="{{leadershipRole.name}}" width="24" height="24"/></div>
+          <h4 class="leadership-name">{{leadershipRole.name}}</h4>
+          <div class="leadership-controls">
+            <a class="leadership-control leadership-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="leadership-control leadership-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+  </section>
+</form>
+
+<!--
 <form class="{{cssClass}} kingdom-form" autocomplete="off">
   {{#if editable}}
   <div class="kingdom-name editable">
@@ -65,7 +143,7 @@
 
         <label for="title">{{leadershipRole.name}}</label>
         <label for="pc-in-role>">Select a PC/NPC</label>
-        
+
         {{#each kingdom.settings.leadershipRoles as |leadershipRole|}}
         <div class="flexrow">
           <div>{{leadershipRole.name}}</div>
@@ -82,3 +160,4 @@
     </div>
   {{/if}}
 </form>
+-->

@@ -13,7 +13,6 @@ export class Kingdom {
 
   constructor ({ governmentType, size, progress } = {}) {
     let config = new KingdomConfig()
-    log("HERE: " + config.governmentTypes)
     this._config = config
     const isSupportedSize = size && Kingdom.sizes.indexOf(parseInt(size)) >= 0;
     this._size = isSupportedSize ? parseInt(size) : Kingdom.sizes[0];
